@@ -1,11 +1,11 @@
 // ===== Birthday "database" =====
 const people = {
-  Raven: { name: "Raven", month: 0, day: 7, page: "raven-birthday.html" },
-  Jess: { name: "Jess", month: 0, day: 10, page: "jess-birthday.html" },
-  Nai: { name: "Nai", month: 1, day: 11, page: "/nai" },
-  DNA: { name: "DNA", month: 5, day: 2, page: "dna-birthday.html" },
-  Unknown: { name: "Unknown", month: 1, day: 22, page: "unknown-birthday.html" },
-  Lola: { name: "Lola", month: 7, day: 27, page: "lola-birthday.html" }
+  Raven: { name: "Raven", month: 0, day: 6, page: "/birthdays/raven" },
+  Jess: { name: "Jess", month: 0, day: 10, page: "/birthdays/jess" },
+  Nai: { name: "Nai", month: 1, day: 11, page: "/birthdays/nai" },
+  DNA: { name: "DNA", month: 5, day: 2, page: "/birthdays/dna" },
+  Unknown: { name: "Unknown", month: 1, day: 22, page: "/birthdays/unknown" },
+  Lola: { name: "Lola", month: 7, day: 27, page: "/birthdays/lola" }
 };
 
 const app = document.getElementById("app");
