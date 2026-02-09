@@ -515,7 +515,7 @@
         // Check if current date is February 11th or later
         function checkDate() {
             const today = new Date();
-            const targetDate = new Date(today.getFullYear(), 1, 11); // February 11 (month is 0-indexed)
+            const targetDate = new Date(today.getFullYear(), 1, 8); // February 11 (month is 0-indexed)
             
             // If today's year is before the target year, or same year but before Feb 11
             if (today < targetDate) {
@@ -554,7 +554,7 @@
         
         function updateCountdown() {
             const today = new Date();
-            const targetDate = new Date(today.getFullYear(), 1, 11); // February 11 (month is 0-indexed)
+            const targetDate = new Date(today.getFullYear(), 1, 8); // February 11 (month is 0-indexed)
             const timeLeft = targetDate - today;
             
             const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
@@ -731,3 +731,4 @@
     </script>
 </body>
 </html>
+
