@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>HMMMM It's Something....</title>
+      <style>
+         * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         }
+         body {
+         width: 100%;
+         height: 100vh;
+         display: flex;
+         justify-content: center;
+         align-items: flex-start;
+         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+         font-family: 'Arial', sans-serif;
+         overflow: hidden;
+         cursor: pointer;
+         -webkit-touch-callout: none;
+         touch-action: manipulation;
+         }
+         #mainContainer {
+         padding-top: 40px;
+         }
+         .container {
+         text-align: center;
+         position: relative;
+         z-index: 10;
+         }
+         .birthday-text {
+         font-size: 4rem;
+         font-weight: bold;
+         color: white;
+         text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+         margin-bottom: 30px;
+         letter-spacing: 3px;
+         user-select: none;
+         }
+         .happy {
+         display: inline-block;
+         animation: slideIn 1s ease-out forwards, bounce 0.6s ease-in-out 1s infinite;
+         opacity: 0;
+         margin-right: 15px;
+         }
+         .birthday {
+         display: inline-block;
+         animation: slideIn 1.3s ease-out forwards, bounce 0.6s ease-in-out 1.3s infinite;
+         opacity: 0;
+         margin-right: 15px;
+         }
+         .text {
+         display: inline-block;
+         animation: slideIn 1.6s ease-out forwards, bounce 0.6s ease-in-out 1.6s infinite;
+         opacity: 0;
+         }
+         @keyframes slideIn {
+         0% {
+         transform: translateY(-100px);
+         opacity: 0;
+         }
+         100% {
+         transform: translateY(0);
+         opacity: 1;
+         }
+         }
+         @keyframes bounce {
+         0%, 100% {
+         transform: translateY(0);
+         }
+         50% {
+         transform: translateY(-20px);
+         }
+         }
+         .cake {
+         font-size: 6rem;
+         animation: rotate 2s linear infinite, float 3s ease-in-out infinite;
+         display: inline-block;
+         margin: 20px;
+         user-select: none;
+         }
+         @keyframes rotate {
+         0% {
+         transform: rotateZ(0deg);
+         }
+         100% {
+         transform: rotateZ(360deg);
+         }
+         }
+         @keyframes float {
+         0%, 100% {
+         transform: translateY(0px);
+         }
+         50% {
+         transform: translateY(-20px);
+         }
+         }
+         .balloon {
+         position: absolute;
+         width: 40px;
+         height: 50px;
+         border-radius: 50% 50% 50% 0;
+         font-size: 2rem;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         animation: float-up linear infinite;
+         }
+         @keyframes float-up {
+         0% {
+         transform: translateY(100vh) rotate(0deg);
+         opacity: 1;
+         }
+         100% {
+         transform: translateY(-100vh) rotate(360deg);
+         opacity: 0;
+         }
+         }
+         .confetti-piece {
+         position: fixed;
+         width: 10px;
+         height: 10px;
+         pointer-events: none;
+         z-index: 1000;
+         }
+         .confetti-burst {
+         position: fixed;
+         width: 15px;
+         height: 15px;
+         pointer-events: none;
+         z-index: 1000;
+         }
+         @keyframes confetti-fall {
+         0% {
+         transform: translateY(0) rotateZ(0deg);
+         opacity: 1;
+         }
+         100% {
+         transform: translateY(100vh) rotateZ(720deg);
+         opacity: 0;
+         }
+         }
+         .sub-text {
+         font-size: 1.5rem;
+         color: rgba(255, 255, 255, 0.9);
+         margin-top: 40px;
+         animation: fadeInUp 2s ease-out forwards;
+         opacity: 0;
+         user-select: none;
+         }
+         @keyframes fadeInUp {
+         0% {
+         transform: translateY(30px);
+         opacity: 0;
+         }
+         100% {
+         transform: translateY(0);
+         opacity: 1;
+         }
+         }
+         .stars {
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         top: 0;
+         left: 0;
+         }
+         .star {
+         position: absolute;
+         width: 3px;
+         height: 3px;
+         background: white;
+         border-radius: 50%;
+         animation: twinkle 1.5s ease-in-out infinite;
+         }
+         @keyframes twinkle {
+         0%, 100% {
+         opacity: 0.3;
+         }
+         50% {
+         opacity: 1;
+         }
+         }
+         .ground-balloons {
+         position: fixed;
+         height: 100vh;
+         width: 100%;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         z-index: 5;
+         pointer-events: none;
+         }
+         .side-balloons {
+         display: flex;
+         flex-direction: column;
+         justify-content: space-around;
+         height: 100%;
+         padding: 20px;
+         }
+         .left-balloons {
+         position: fixed;
+         left: 0;
+         top: 0;
+         }
+         .right-balloons {
+         position: fixed;
+         right: 0;
+         top: 0;
+         }
+         .balloon-emoji {
+         font-size: 3rem;
+         animation: float-side 4s ease-in-out infinite;
+         user-select: none;
+         }
+         .left-balloons .balloon-emoji {
+         animation: float-left 4s ease-in-out infinite;
+         }
+         .right-balloons .balloon-emoji {
+         animation: float-right 4s ease-in-out infinite;
+         }
+         @keyframes float-left {
+         0%, 100% {
+         transform: translateX(-30px) translateY(0);
+         }
+         50% {
+         transform: translateX(30px) translateY(-20px);
+         }
+         }
+         @keyframes float-right {
+         0%, 100% {
+         transform: translateX(30px) translateY(0);
+         }
+         50% {
+         transform: translateX(-30px) translateY(-20px);
+         }
+         }
+         .profile-pic {
+         width: 200px;
+         height: 200px;
+         border-radius: 50%;
+         margin: 0 auto 30px;
+         background: white;
+         border: 5px solid white;
+         box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+         object-fit: cover;
+         animation: slideIn 1s ease-out forwards;
+         opacity: 0;
+         }
+         .countdown-container {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         height: 100vh;
+         z-index: 100;
+         }
+         .click-hint {
+         position: absolute;
+         bottom: 20px;
+         left: 50%;
+         transform: translateX(-50%);
+         color: white;
+         font-size: 0.9rem;
+         opacity: 0;
+         animation: fadeInOut 2s ease-in-out 3s infinite;
+         }
+         @keyframes fadeInOut {
+         0%, 100% {
+         opacity: 0;
+         }
+         50% {
+         opacity: 0.7;
+         }
+         }
+         /* Mobile Responsive Styles */
+         @media (max-width: 768px) {
+         .birthday-text {
+         font-size: 2rem;
+         margin-bottom: 15px;
+         letter-spacing: 1px;
+         }
+         .happy, .birthday, .text {
+         margin-right: 8px;
+         }
+         .cake {
+         font-size: 4rem;
+         margin: 15px;
+         }
+         .profile-pic {
+         width: 120px;
+         height: 120px;
+         margin: 0 auto 15px;
+         border: 3px solid white;
+         }
+         .sub-text {
+         font-size: 1rem;
+         margin-top: 20px;
+         }
+         .balloon-emoji {
+         font-size: 2rem;
+         }
+         .click-hint {
+         font-size: 0.7rem;
+         bottom: 10px;
+         }
+         .countdown-container {
+         padding: 20px;
+         }
+         #countdownTimer {
+         font-size: 1.8rem !important;
+         margin-bottom: 20px !important;
+         }
+         .countdown-container h2 {
+         font-size: 1.3rem !important;
+         padding: 0 15px;
+         }
+         .ground-balloons {
+         padding-bottom: 10px;
+         }
+         .container {
+         padding: 0 20px;
+         overflow-y: auto;
+         max-height: 100vh;
+         margin-top: 20px;
+         }
+         }
+         @media (max-width: 480px) {
+         .birthday-text {
+         font-size: 1.5rem;
+         margin-bottom: 12px;
+         }
+         .happy, .birthday, .text {
+         margin-right: 5px;
+         }
+         .cake {
+         font-size: 3rem;
+         margin: 10px;
+         }
+         .profile-pic {
+         width: 100px;
+         height: 100px;
+         margin: 0 auto 10px;
+         border: 3px solid white;
+         }
+         .sub-text {
+         font-size: 0.9rem;
+         margin-top: 15px;
+         }
+         .balloon-emoji {
+         font-size: 1.5rem;
+         }
+         .click-hint {
+         font-size: 0.65rem;
+         bottom: 5px;
+         }
+         #countdownTimer {
+         font-size: 1.4rem !important;
+         margin-bottom: 15px !important;
+         }
+         .countdown-container h2 {
+         font-size: 1.1rem !important;
+         padding: 0 10px;
+         }
+         .ground-balloons {
+         padding-bottom: 5px;
+         }
+         .container {
+         padding: 0 15px;
+         }
+         }
+         .letter {
+         max-width: 600px;
+         margin: 40px auto 0;
+         padding: 25px 30px;
+         background: rgba(255, 255, 255, 0.15);
+         border-radius: 12px;
+         color: rgba(255, 255, 255, 0.95);
+         font-size: 1.1rem;
+         line-height: 1.6;
+         backdrop-filter: blur(6px);
+         box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+         animation: fadeInUp 2s ease-out forwards;
+         opacity: 0;
+         }
+         .letter p {
+         margin-bottom: 16px;
+         }
+         .letter .signature {
+         margin-top: 25px;
+         font-weight: bold;
+         text-align: right;
+         }
+         .typewriter {
+         display: inline;
+         border-right: 3px solid rgba(255,255,255,0.9);
+         animation: blinkCursor 0.8s steps(1) infinite;
+         }
+         @keyframes blinkCursor {
+         0%, 50% { border-color: rgba(255,255,255,0.9); }
+         51%, 100% { border-color: transparent; }
+         }
+      </style>
+   </head>
+   <body>
+      <div class="stars" id="stars"></div>
+      <div class="countdown-container" id="countdownContainer">
+         <div id="countdownTimer" style="color: white; font-size: 2.5rem; letter-spacing: 2px; font-weight: bold; margin-bottom: 30px;"></div>
+         <h2 style="color: white; font-size: 1.8rem;">WOAH! You are too early! 😅</h2>
+      </div>
+      <div class="container" id="mainContainer" style="display: none;">
+         <div class="cake">🎂</div>
+         <div class="birthday-text">
+            <span class="happy">Happy</span>
+            <span class="birthday">Birthday</span>
+            <span class="text">Lola! 🎉</span>
+         </div>
+         <div class="letter">
+            <p class="typewriter" data-text="Dear Lola,"></p>
+            <p class="typewriter" data-text="Happy Birthday 🎉"></p>
+            <p class="typewriter" data-text="Out of everyone, you are the one I am most sorry I have to miss. And I hope I can uphold my promise not to leave and keep in contact with you. I will try my best but just in case I can't I want to say sorry."></p>
+            <p class="typewriter" data-text="Either way, HAPPY BIRTHDAY! Now I'm curious are you ancient like me now?"></p>
+            <p class="typewriter" data-text="My message to you is to keep trying no matter what anyone says. I miss you and I know you know that. I wish I could text you but unfortunately that isn't possible right now. Feel free to blow up my account I'll reaad it all when I get back."></p>
+            <p class="typewriter signature" data-text="With built up love ready to come back to you, Guy"></p>
+         </div>
+      </div>
+      <div class="ground-balloons" id="groundBalloons">
+         <div class="side-balloons left-balloons">
+            <div class="balloon-emoji">🎈</div>
+            <div class="balloon-emoji">🎈</div>
+            <div class="balloon-emoji">🎈</div>
+         </div>
+         <div class="side-balloons right-balloons">
+            <div class="balloon-emoji">🎈</div>
+            <div class="balloon-emoji">🎈</div>
+            <div class="balloon-emoji">🎈</div>
+         </div>
+      </div>
+      <script>
+         // Check if current date is February 11th or later
+         function checkDate() {
+             const today = new Date();
+             const targetDate = new Date(today.getFullYear(), 7, 27); // February 11 (month is 0-indexed)
+             
+             // If today's year is before the target year, or same year but before Feb 11
+             if (today < targetDate) {
+                 // Calculate time remaining
+                 const timeLeft = targetDate - today;
+                 
+                 // Show countdown
+                 const countdownContainer = document.getElementById('countdownContainer');
+                 const mainContainer = document.getElementById('mainContainer');
+                 const groundBalloons = document.getElementById('groundBalloons');
+                 const clickHint = document.querySelector('.click-hint');
+                 
+                 countdownContainer.style.display = 'flex';
+                 mainContainer.style.display = 'none';
+                 groundBalloons.style.display = 'none';
+                 
+                 // Update countdown every second
+                 updateCountdown();
+                 setInterval(updateCountdown, 1000);
+                 
+                 return false; // Don't load birthday animation
+             } else {
+                 // Show birthday animation
+                 const countdownContainer = document.getElementById('countdownContainer');
+                 const mainContainer = document.getElementById('mainContainer');
+                 const groundBalloons = document.getElementById('groundBalloons');
+                 const clickHint = document.querySelector('.click-hint');
+                 
+                 countdownContainer.style.display = 'none';
+                 mainContainer.style.display = 'block';
+                 groundBalloons.style.display = 'flex';
+                 
+                 return true; // Load birthday animation
+             }
+         }
+         
+         function updateCountdown() {
+             const today = new Date();
+             const targetDate = new Date(today.getFullYear(), 7, 27); // February 11 (month is 0-indexed)
+             const timeLeft = targetDate - today;
+             
+             const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+             const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+             
+             const countdownTimer = document.getElementById('countdownTimer');
+             countdownTimer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+         }
+         
+         // Create star background
+         function createStars() {
+             const starsContainer = document.getElementById('stars');
+             for (let i = 0; i < 50; i++) {
+                 const star = document.createElement('div');
+                 star.className = 'star';
+                 star.style.left = Math.random() * 100 + '%';
+                 star.style.top = Math.random() * 100 + '%';
+                 star.style.animationDelay = Math.random() * 1.5 + 's';
+                 starsContainer.appendChild(star);
+             }
+         }
+         
+         // Create confetti
+         function createConfetti() {
+             const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE'];
+             for (let i = 0; i < 50; i++) {
+                 const confetti = document.createElement('div');
+                 confetti.className = 'confetti-piece';
+                 confetti.style.left = Math.random() * 100 + '%';
+                 confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                 confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                 confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                 confetti.style.animation = 'confetti-fall linear forwards';
+                 document.body.appendChild(confetti);
+             }
+         }
+         
+         // Create floating balloons
+         function createFloatingBalloons() {
+             const balloons = ['🎈', '🎉', '✨', '🎊', '🎁'];
+             for (let i = 0; i < 8; i++) {
+                 const balloon = document.createElement('div');
+                 balloon.className = 'balloon';
+                 balloon.textContent = balloons[Math.floor(Math.random() * balloons.length)];
+                 balloon.style.left = Math.random() * 90 + 5 + '%';
+                 balloon.style.bottom = '-100px';
+                 balloon.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                 balloon.style.animationDelay = Math.random() * 2 + 's';
+                 document.body.appendChild(balloon);
+             }
+         }
+         
+         // Create automatic firework explosions
+         function triggerFireworks() {
+             // Different color palettes for variety
+             const colorPalettes = [
+                 ['#FF1744', '#FF5252', '#FF8A80', '#FFD740'],  // Red to Yellow
+                 ['#00E676', '#00BF60', '#1DE9B6', '#00E5FF'],  // Green to Cyan
+                 ['#536DFE', '#448AFF', '#2979F3', '#2196F3'],  // Blue palette
+                 ['#E040FB', '#D500F9', '#D500F9', '#E040FB'],  // Purple palette
+                 ['#FF6E40', '#FF7043', '#FFAB91', '#FFB74D'],  // Orange to Yellow
+                 ['#FF0097', '#FF1493', '#FF69B4', '#FFB6C1'],  // Pink palette
+                 ['#76FF03', '#FFEA00', '#FFC400', '#FF9100'],  // Green to Orange
+                 ['#00B0FF', '#00E5FF', '#1DE9B6', '#00E676']   // Cyan to Green
+             ];
+             
+             // Pick random color palette
+             const colors = colorPalettes[Math.floor(Math.random() * colorPalettes.length)];
+             
+             // Pick random explosion center position
+             const explodeX = Math.random() * window.innerWidth;
+             const explodeY = Math.random() * window.innerHeight;
+             
+             // Create colorful confetti burst from random position
+             for (let i = 0; i < 80; i++) {
+                 const confetti = document.createElement('div');
+                 confetti.className = 'confetti-burst';
+                 confetti.style.left = explodeX + 'px';
+                 confetti.style.top = explodeY + 'px';
+                 confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                 confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                 confetti.style.animationDelay = '0s';
+                 confetti.style.animation = 'confetti-fall linear forwards';
+                 confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                 confetti.style.boxShadow = `0 0 5px ${colors[Math.floor(Math.random() * colors.length)]}`;
+                 document.body.appendChild(confetti);
+             }
+             
+             // Create bright shooting stars from explosion point
+             for (let i = 0; i < 40; i++) {
+                 const star = document.createElement('div');
+                 star.style.position = 'fixed';
+                 star.style.width = '8px';
+                 star.style.height = '8px';
+                 star.style.background = colors[Math.floor(Math.random() * colors.length)];
+                 star.style.borderRadius = '50%';
+                 star.style.pointerEvents = 'none';
+                 star.style.boxShadow = `0 0 15px ${colors[Math.floor(Math.random() * colors.length)]}`;
+                 star.style.zIndex = '1001';
+                 star.style.left = explodeX + 'px';
+                 star.style.top = explodeY + 'px';
+                 document.body.appendChild(star);
+                 
+                 const angle = (Math.PI * 2 * i) / 40;
+                 const velocity = 8;
+                 const vx = Math.cos(angle) * velocity;
+                 const vy = Math.sin(angle) * velocity;
+                 
+                 let x = explodeX;
+                 let y = explodeY;
+                 let opacity = 1;
+                 
+                 const interval = setInterval(() => {
+                     x += vx;
+                     y += vy;
+                     star.style.left = x + 'px';
+                     star.style.top = y + 'px';
+                     star.style.opacity = opacity;
+                     opacity -= 0.025;
+                     
+                     if (opacity <= 0) {
+                         clearInterval(interval);
+                         star.remove();
+                     }
+                 }, 20);
+             }
+         }
+         
+         const speed = 35; // typing speed in ms
+         const delayBetweenLines = 600;
+         
+         const elements = document.querySelectorAll('.typewriter');
+         
+         let index = 0;
+         
+         function typeLine(el, text, i = 0) {
+         if (i < text.length) {
+         el.textContent += text.charAt(i);
+         setTimeout(() => typeLine(el, text, i + 1), speed);
+         } else {
+         el.classList.remove('typewriter');
+         index++;
+         if (index < elements.length) {
+         setTimeout(startTyping, delayBetweenLines);
+         }
+         }
+         }
+         
+         function startTyping() {
+         const el = elements[index];
+         const text = el.dataset.text;
+         typeLine(el, text);
+         }
+         
+         startTyping();
+         
+         
+         // Handle click for extra celebration
+         // Disabled - no longer triggers on click
+         
+         // Initialize animations
+         window.addEventListener('load', function() {
+             if (checkDate()) {
+                 createStars();
+                 createFloatingBalloons();
+                 createConfetti();
+                 
+                 // Add automatic firework explosions every 2 seconds
+                 setInterval(triggerFireworks, 2000);
+             }
+         });
+      </script>
+   </body>
+</html>
